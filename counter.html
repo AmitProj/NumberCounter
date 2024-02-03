@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="img/icon" href="img/body">
+    <link rel="stylesheet" href="css/boot.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Document</title>
+    
+<style>
+    .sectionBgColor{
+        position: relative; 
+        background: red; 
+        z-index: 0;
+    }
+    .mainDiv{
+        height: 100vh;
+        margin-top: 0px;
+        transition: all 0.4s ease;
+        
+    }
+    .tab-C{
+        flex: 0;
+        transition: all 0.4s ease;
+    }
+    h1.tab-b{
+        transition: all 0.4s ease;
+        font-size: 60px;
+        font-weight: bold;
+        color: #e2e2e280;
+        flex: 0;
+        cursor: pointer;
+        padding: 0;
+    }
+    .tab-C.active h1.tab-b{
+        color: #ffffff;
+        transition: all 0.4s ease;
+    }
+    .tab-C small{font-size: 16px; color: #fff; text-transform: uppercase;transition: all 0.4s ease;}
+    .tab-C::before{
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top:0;
+            z-index: -1;
+            transition: all 0.4s ease;
+            background-size:cover;
+            background-repeat: no-repeat;
+            mix-blend-mode: darken;
+            opacity: 0;
+        }
+        .tab-C:nth-child(1).active::before{background-image: url(img/f1.jpg); opacity: 1;transition: all 0.4s ease;}
+        .tab-C:nth-child(2).active::before{background-image: url(img/f2.jpg); opacity: 1;transition: all 0.4s ease;}
+        .tab-C:nth-child(3).active::before{background-image: url(img/f3.jpeg); opacity: 1;transition: all 0.4s ease;}
+        .tab-C:nth-child(4).active::before{background-image: url(img/f5.jpg); opacity: 1;transition: all 0.4s ease;}
+       
+    
+        
+</style>
+
+</head>
+<body>
+    <main>
+       <div class="container-fluid sectionBgColor">
+        <div class="container">
+            <div class="row  mainDiv justify-content-between align-items-center" id="mainDiv">
+                <div class="tab-C text-center" >
+                    <h1 class="tab-b" numberCounter="20000" arithSign="+">000</h1>
+                    <small>Day</small>
+                    <div class="bg-img"></div>
+                </div>
+                <div class="tab-C text-center">
+                    <h1 class="tab-b" numberCounter="5000" arithSign="+">000</h1>
+                    <small>Week</small>
+                    <div class="bg-img"></div>
+                </div>
+                <div class="tab-C text-center">
+                    <h1 class="tab-b" numberCounter="900" arithSign="+">000</h1>
+                    <small>Month</small>
+                    <div class="bg-img"></div>
+                </div>
+                <div class="tab-C text-center">
+                    <h1 class="tab-b" numberCounter="97" arithSign="+">000</h1>
+                    <small>Year</small>
+                    <div class="bg-img"></div>
+                </div>
+            </div>
+        </div>
+       </div>
+    </main>
+<script src="js/boot.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/custom.js"></script>  
+ <script>
+    let btnContainer = document.querySelector('.mainDiv');
+let btn = document.querySelectorAll('.tab-C'); 
+
+btn.forEach(el => {
+    el.addEventListener('mouseover', function() {
+        btnContainer.querySelector('.active')?.classList.remove('active');
+        el.classList.add('active');
+    });
+});
+const counter = document.querySelectorAll('.tab-b');
+const speed = 200;
+    counter.forEach(counter=>{
+        const animation =()=>{
+            const value = +counter.getAttribute('numberCounter');
+            const data = +counter.innerText;
+            const time = value / speed;
+            if(data < value){
+                counter.innerText = Math.ceil(data + time);
+                setTimeout( animation, 1);
+            }else{
+                counter.innerText = value + counter.getAttribute('arithSign');
+            }
+        }
+        animation()
+    })
+
+ </script>
+</body>
+</html>
